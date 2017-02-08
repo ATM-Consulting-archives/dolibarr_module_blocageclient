@@ -62,7 +62,7 @@ function hideElement($str='') {
 		<script language="JavaScript" type="text/JavaScript">
 			
 			$(document).ready(function() {
-				$('a[href*="<?php print $str; ?>"]').hide();
+				$('.tabsAction a[href*="<?php print $str; ?>"]').hide();
 			});
 			
 		</script>
