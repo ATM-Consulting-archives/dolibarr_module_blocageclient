@@ -102,11 +102,11 @@ class Actionsblocageclient
 		
 			if($parameters['currentcontext'] === 'commcard') {
 				
-				if(!empty($conf->global->BLOCAGE_CLIENT_ON_CUSTOMER_ORDER)) hideElement('/htdocs/commande/card.php');
+				if(!empty($conf->global->BLOCAGE_CLIENT_ON_CUSTOMER_ORDER)) hideElement('/commande/card.php');
 				
 			} elseif($parameters['currentcontext'] === 'ordercard') {
 				
-				if(!empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING)) hideElement('/htdocs/expedition/shipment.php?id=');
+				if(!empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING)) hideElement('/expedition/shipment.php?id=');
 				
 				if(!empty($conf->global->BLOCAGE_CLIENT_ON_CUSTOMER_ORDER)) hideElement('&action=validate');
 				
