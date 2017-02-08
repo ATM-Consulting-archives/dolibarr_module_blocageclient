@@ -5,3 +5,6 @@ ATMAbout = Ce module a été développé par <a href="http://www.atm-consulting.
 
 blocageclientSetup = Configuration du module blocageclient
 blocageclientAbout = A propos du module blocageclient
+BLOCAGE_CLIENT_ON_SHIPPING=Bloquer les expéditions clients (interdire leur création et validation)
+BLOCAGE_CLIENT_ON_CUSTOMER_ORDER=Bloquer les commandes clients (interdire leur création et validation)
+blocageclientBlockedCustomer=Attention, client bloqué !

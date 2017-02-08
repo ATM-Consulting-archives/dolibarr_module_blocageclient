@@ -64,10 +64,6 @@ class Actionsblocageclient
 		$error = 0; // Error counter
 		$myvalue = 'test'; // A result value
 
-		print_r($parameters);
-		echo "action: " . $action;
-		print_r($object);
-
 		if (in_array('somecontext', explode(':', $parameters['context'])))
 		{
 		  // do something only for the context 'somecontext'
@@ -85,4 +81,45 @@ class Actionsblocageclient
 			return -1;
 		}
 	}
+
+	function formObjectOptions($parameters, &$object, &$action, $hookmanager) {
+		
+		global $db, $conf, $langs;
+		
+		$langs->load('blocageclient@blocageclient');
+		
+		define('INC_FROM_DOLIBARR', true);
+		
+		dol_include_once('/blocageclient/lib/blocageclient.lib.php');
+		
+		if(get_class($object) === 'Societe' || get_class($object) === 'Client') $soc = &$object;
+		elseif(!empty($object->thirdparty)) $soc = &$object->thirdparty;
+		else return 0;
+		
+		$client_bloque = !empty($soc->array_options['options_blocage_client']);
+		
+		if($client_bloque) {
+		
+			if($parameters['currentcontext'] === 'commcard') {
+				
+				if(!empty($conf->global->BLOCAGE_CLIENT_ON_CUSTOMER_ORDER)) hideElement('/htdocs/commande/card.php');
+				
+			} elseif($parameters['currentcontext'] === 'ordercard') {
+				
+				if(!empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING)) hideElement('/htdocs/expedition/shipment.php?id=');
+				
+				if(!empty($conf->global->BLOCAGE_CLIENT_ON_CUSTOMER_ORDER)) hideElement('&action=validate');
+				
+			} elseif($parameters['currentcontext'] === 'expeditioncard' && !empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING)) {
+				
+				hideElement('&action=valid');
+				
+			}
+			
+			setEventMessage($langs->trans('blocageclientBlockedCustomer'), 'warnings');
+			
+		}
+		
+	}
+
 }

@@ -121,10 +121,18 @@ print '</td></tr>';
 
 $var=!$var;
 print '<tr '.$bc[$var].'>';
-print '<td>'.$langs->trans("ParamLabel").'</td>';
+print '<td>'.$langs->trans("BLOCAGE_CLIENT_ON_SHIPPING").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="center" width="300">';
-print ajax_constantonoff('CONSTNAME');
+print ajax_constantonoff('BLOCAGE_CLIENT_ON_SHIPPING');
+print '</td></tr>';
+
+$var=!$var;
+print '<tr '.$bc[$var].'>';
+print '<td>'.$langs->trans("BLOCAGE_CLIENT_ON_CUSTOMER_ORDER").'</td>';
+print '<td align="center" width="20">&nbsp;</td>';
+print '<td align="center" width="300">';
+print ajax_constantonoff('BLOCAGE_CLIENT_ON_CUSTOMER_ORDER');
 print '</td></tr>';
 
 print '</table>';

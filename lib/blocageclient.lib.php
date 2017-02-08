@@ -53,3 +53,19 @@ function blocageclientAdminPrepareHead()
 
     return $head;
 }
+
+function hideElement($str='') {
+	
+	if(empty($str))return 0;
+	
+	?>
+		<script language="JavaScript" type="text/JavaScript">
+			
+			$(document).ready(function() {
+				$('a[href*="<?php print $str; ?>"]').hide();
+			});
+			
+		</script>
+	<?php
+	
+}

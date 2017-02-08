@@ -87,7 +87,13 @@ class modblocageclient extends DolibarrModules
 		//							'dir' => array('output' => 'othermodulename'),      // To force the default directories names
 		//							'workflow' => array('WORKFLOW_MODULE1_YOURACTIONTYPE_MODULE2'=>array('enabled'=>'! empty($conf->module1->enabled) && ! empty($conf->module2->enabled)', 'picto'=>'yourpicto@blocageclient')) // Set here all workflow context managed by module
 		//                        );
-		$this->module_parts = array();
+		$this->module_parts = array(
+										'hooks'=>array(
+															'commcard'
+															,'ordercard'
+															,'expeditioncard'
+														)
+									);
 
 		// Data directories to create when module is enabled.
 		// Example: this->dirs = array("/blocageclient/temp");
@@ -246,13 +252,19 @@ class modblocageclient extends DolibarrModules
 	 */
 	function init($options='')
 	{
+		global $db;
+		
 		$sql = array();
 		
 		define('INC_FROM_DOLIBARR',true);
-
+		
+		require_once DOL_DOCUMENT_ROOT . '/core/class/extrafields.class.php';
 		dol_include_once('/blocageclient/config.php');
 		dol_include_once('/blocageclient/script/create-maj-base.php');
 
+		$e = new ExtraFields($db);
+		$e->addExtraField('blocage_client', 'Blocage client', 'boolean', '', '', 'societe');
+		
 		$result=$this->_load_tables('/blocageclient/sql/');
 
 		return $this->_init($sql, $options);
