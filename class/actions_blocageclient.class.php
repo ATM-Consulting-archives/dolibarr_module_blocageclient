@@ -106,7 +106,7 @@ class Actionsblocageclient
 				
 			} elseif($parameters['currentcontext'] === 'ordercard') {
 				
-				if(!empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING)) hideElement('/expedition/shipment.php');
+				if(!empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING)) hideElement('/expedition/card.php');
 				
 				if(!empty($conf->global->BLOCAGE_CLIENT_ON_CUSTOMER_ORDER)) hideElement('&action=validate');
 				
