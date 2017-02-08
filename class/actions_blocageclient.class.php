@@ -116,7 +116,12 @@ class Actionsblocageclient
 				
 			}
 			
-			setEventMessage($langs->trans('blocageclientBlockedCustomer'), 'warnings');
+			if(($parameters['currentcontext'] === 'commcard' && (!empty($conf->global->BLOCAGE_CLIENT_ON_CUSTOMER_ORDER) || !empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING)))
+				|| ($parameters['currentcontext'] === 'ordercard' && (!empty($conf->global->BLOCAGE_CLIENT_ON_CUSTOMER_ORDER) || !empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING)))
+				|| ($parameters['currentcontext'] === 'expeditioncard' && !empty($conf->global->BLOCAGE_CLIENT_ON_SHIPPING))
+			) {
+				setEventMessage($langs->trans('blocageclientBlockedCustomer'), 'warnings');
+			}
 			
 		}
 		
